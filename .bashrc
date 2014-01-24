@@ -231,7 +231,6 @@ alias du='du -h --max-depth=1'
 alias trash="rm -fr ~/.local/share/Trash"
 alias ls='ls --color=auto'
 alias less='less -W'
-alias rm='srm -rvz'
 alias xmllint='xmllint --format'
 alias ll='ls -l --group-directories-first'
 alias mkdir='mkdir -p'
@@ -717,11 +716,11 @@ ${txtpur}----------------------------------------------------------------------
 #####NOKIA FUNCTIONS####################
 ##======================================
 function prod() {
-   /usr/bin/ssh spaul@$1.pr.int.ent.nokia.com
+   /usr/bin/ssh $1.pr.int.ent.nokia.com
 }
 
 function dev() {
-   /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no shpaul@$1.brislabs.com
+   /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $1.brislabs.com
 }
 
 pullall() {
