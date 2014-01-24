@@ -1,13 +1,16 @@
-#git configurations
-#git config --global color.ui auto
-git config --global --add color.ui true
-git config branch.master.rebase true
-git config --global branch.autosetuprebase always
-git config --global push.default tracking
-git config --global --bool pull.rebase true
+[user]
+	name = niginder
+	email = nicolas.2.ginder@nokia.com
+[alias]
+	st = status -sb
+	co = checkout
+	ci = commit -am 
+	br = branch
+	pr = pull --rebase
+        pr-continue = rebase --continue
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	stash-unapply = !git stash show -p | git apply -R
+        meld = difftool -y -t meld
 
-git config --global alias.lol "log --pretty=oneline --abbrev-commit --graph --decorate"
-git config --global user.name "Shine Paul"
-git config --global user.email "shine.paul@nokia.com"
-
-git config --global help.autocorrect 1
+[push]
+	default = upstream
