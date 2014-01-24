@@ -245,8 +245,8 @@ alias ssh-keygen='ssh-keygen -Rv'
 alias gpull='git pull origin master -u'
 alias more=less
 alias nuke='kill -9'
-
-
+alias latest='ls -Art | tail -n 1'
+alias rlatest='find . -not -type d -printf "%T+ %p\n" | sort -n | tail -1'
 
 # Anti-virus checks
 
@@ -268,6 +268,10 @@ cd() {
   else
     builtin cd ~ && ll
   fi
+}
+
+ff() {
+    find . -type f -iname '*'"$*"'*' -ls ;
 }
 
 md() {
