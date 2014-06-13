@@ -740,7 +740,28 @@ do
 done
 command cd "$CURRENTDIR"
 }
+
+function appgateroute() {
+  sudo ip route add 10.216.220.156 via 172.26.52.1
+  sudo ip route add 10.216.138.0/24 via 172.26.52.1
+  sudo ip route add 10.216.141.0/24 via 172.26.52.1
+  sudo ip route add 10.216.143.0/24 via 172.26.52.1
+}
+
+#my env setup
 export GOPATH=$HOME/go
 export GOROOT=$HOME/Code/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+export IDEA_HOME="/usr/local/idea"
+export PATH=$PATH:$IDEA_HOME/bin
+export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
+export M2_HOME="/usr/local/apache-maven-3.0.4"
+export PATH=$PATH:$M2_HOME/bin
+export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m"
+#proxy
+#other proxy 172.16.99.10
+export no_proxy="127.0.0.1,127.0.1.1,localhost,nokia.com,ssdinst,web-proxy,proxyconf,brislabs.com"
+export http_proxy="http://172.16.42.40:8080/"
+export https_proxy="https://172.16.42.40:8080/"
+export ftp_proxy="ftp://172.16.42.40:8080/"
