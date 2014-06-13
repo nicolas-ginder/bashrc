@@ -238,7 +238,7 @@ alias cp="cp -v"
 alias grep='grep -iI --color=tty'
 alias free='free -m'
 alias ports="lsof -i -n -P"
-alias ps='ps auxfwww'
+#alias ps='ps auxfwww'
 alias ping='ping -c 10'
 alias openports='netstat -nape --inet'
 alias ssh-keygen='ssh-keygen -Rv'
@@ -740,3 +740,7 @@ do
 done
 command cd "$CURRENTDIR"
 }
+export GOPATH=$HOME/go
+export GOROOT=$HOME/Code/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
