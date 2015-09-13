@@ -42,7 +42,7 @@ clear
 #echo -e  "${BROWN}"; free ;
 #echo -e ""
 echo -ne "${BROWN}Up time:";uptime | awk /'up/'
-#echo "";
+echo "";
 
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -103,10 +103,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\][\t]\$ '
+if [ "$color_prompt" = yes ]; then 
+ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\][\t]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w[\t]\$ '
+ PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w[\t]\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -199,7 +199,10 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$(tput sgr0)\]$ '
+#export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$#(tput sgr0)\]$ '
+export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\]\[$(tput sgr0)\]$ '
+
+export PS1="$PS1\$(git-radar --bash --fetch)"
 
 up(){
   local d=""
@@ -749,19 +752,20 @@ function appgateroute() {
 }
 
 #my env setup
-export GOPATH=$HOME/go
-export GOROOT=$HOME/Code/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export IDEA_HOME="/usr/local/idea"
-export PATH=$PATH:$IDEA_HOME/bin
-export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
-export M2_HOME="/usr/local/apache-maven-3.0.4"
-export PATH=$PATH:$M2_HOME/bin
-export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m"
+#export GOPATH=$HOME/go
+#export GOROOT=$HOME/Code/go
+#export PATH=$PATH:$GOPATH/bin
+#export PATH=$PATH:$GOROOT/bin
+#export IDEA_HOME="/usr/local/idea"
+#export PATH=$PATH:$IDEA_HOME/bin
+#export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
+#export M2_HOME="/usr/local/apache-maven-3.0.4"
+#export PATH=$PATH:$M2_HOME/bin
+#export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m"
 #proxy
 #other proxy 172.16.99.10
-export no_proxy="127.0.0.1,127.0.1.1,localhost,nokia.com,ssdinst,web-proxy,proxyconf,brislabs.com"
-export http_proxy="http://172.16.42.40:8080/"
-export https_proxy="https://172.16.42.40:8080/"
-export ftp_proxy="ftp://172.16.42.40:8080/"
+#export no_proxy="127.0.0.1,127.0.1.1,localhost,nokia.com,ssdinst,web-proxy,proxyconf,brislabs.com"
+#export http_proxy="http://172.16.42.40:8080/"
+#export https_proxy="https://172.16.42.40:8080/"
+export PATH=$PATH:$HOME/bin:~/mycode/git-radar
+#export ftp_proxy="ftp://172.16.42.40:8080/"
