@@ -188,7 +188,7 @@ extract () {
 	fi
 }
 
-export EDITOR=/usr/bin/vi
+export EDITOR='emacsclient -t'
 export GREP_OPTIONS=--color=auto
 export GREP_COLORS='ms=01;36'
 export PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}:${PWD}\007"'
@@ -199,10 +199,10 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-#export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$#(tput sgr0)\]$ '
-export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\]\[$(tput sgr0)\]$ '
+export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$(tput sgr0)\]$ '
+#export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\]\[$(tput sgr0)\]$ '
 
-export PS1="$PS1\$(git-radar --bash --fetch)"
+#export PS1="$PS1\$(git-radar --bash --fetch)"
 
 up(){
   local d=""
@@ -219,8 +219,8 @@ up(){
 }
 
 ## Aliases
-
 alias -p f="find . -iname -type f"
+alias em='emacsclient -c -a emacs'
 alias install='sudo -E apt-get install'
 alias search='sudo -E apt-cache search'
 alias show='sudo -E apt-cache show'
