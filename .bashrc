@@ -221,6 +221,7 @@ up(){
 ## Aliases
 alias -p f="find . -iname -type f"
 alias em='emacsclient -c -a emacs'
+alias eml='emacs -q --load /home/nico/code/emacs-live/init.el'
 alias install='sudo -E apt-get install'
 alias search='sudo -E apt-cache search'
 alias show='sudo -E apt-cache show'
