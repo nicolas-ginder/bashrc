@@ -7,7 +7,6 @@
 #sudo apt-get install secure-delete
 #sudo apt-get install git
 ######################
-
 # Define a few Colours
 BLACK='\e[0;30m'
 BLUE='\e[0;34m'
@@ -199,6 +198,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+source /usr/share/git/completion/git-prompt.sh
 export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$(tput sgr0)\]$ '
 #export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\]\[$(tput sgr0)\]$ '
 
@@ -220,7 +220,8 @@ up(){
 
 ## Aliases
 alias -p f="find . -iname -type f"
-alias em='emacsclient -c -a emacs'
+alias em='emacsclient -c'
+alias emt='emacsclient -t'
 alias eml='emacs -q --load /home/nico/code/emacs-live/init.el'
 alias install='sudo -E apt-get install'
 alias search='sudo -E apt-cache search'
@@ -769,4 +770,9 @@ function appgateroute() {
 #export http_proxy="http://172.16.42.40:8080/"
 #export https_proxy="https://172.16.42.40:8080/"
 export PATH=$PATH:$HOME/bin:~/mycode/git-radar
+
+#source "/usr/lib/bash-git-prompt/gitprompt.sh"
+#GIT_PROMPT_ONLY_IN_REPO=1
+
+
 #export ftp_proxy="ftp://172.16.42.40:8080/"
