@@ -1,12 +1,3 @@
-######################
-# DEPENDANCIES
-
-#sudo apt-get install xmllint
-#install libxml2-utils (for debian)
-#sudo apt-get install figlet
-#sudo apt-get install secure-delete
-#sudo apt-get install git
-######################
 # Define a few Colours
 BLACK='\e[0;30m'
 BLUE='\e[0;34m'
@@ -44,123 +35,21 @@ echo -ne "${BROWN}Up time:";uptime | awk /'up/'
 echo "";
 
 
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-
 # After each command, save and reload history
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# correct misspelled directories
-shopt -s cdspell
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then 
- PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\][\t]\$ '
-else
- PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w[\t]\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=100000
-HISTFILESIZE=200000
+export HISTSIZE=100000
+export HISTFILESIZE=200000
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth:ignoredups
-export HISTIGNORE=l:ls:ps:cd:exit
-export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-bind '"\e[A":history-search-backward'
-bind '"\e[A":history-search-backward'
+export HISTCONTROL=ignoreboth:ignoredups
+#export HISTIGNORE=l:ls:ps:cd:exit
 
-# make backups of files
-or () {
-	if [ -e "$@" ]; then
-		for i in "$@"
-		do
-			cp "$i" "$i".orig
-		done
-	fi
-}
 
 # extract archive files
 extract () {
@@ -188,9 +77,7 @@ extract () {
 }
 
 export EDITOR='emacsclient -t'
-export GREP_OPTIONS=--color=auto
 export GREP_COLORS='ms=01;36'
-export PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}:${PWD}\007"'
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -198,11 +85,10 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
 source /usr/share/git/completion/git-prompt.sh
 export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\] $(__git_ps1 "[%s]") \[$(tput sgr0)\]$ '
-#export PS1='\[\e[0;32m\e[m$(tput setaf 3)\]\u@\h:\[$(tput sgr0)$(tput setaf 6)\]\w\[$(tput sgr0)$(tput setaf 2)\]\[$(tput sgr0)\]$ '
 
-#export PS1="$PS1\$(git-radar --bash --fetch)"
 
 up(){
   local d=""
@@ -219,17 +105,10 @@ up(){
 }
 
 ## Aliases
-alias -p f="find . -iname -type f"
+alias f="find . -iname -type f"
 alias em='emacsclient -c'
 alias emt='emacsclient -t'
 alias eml='emacs -q --load /home/nico/code/emacs-live/init.el'
-alias install='sudo -E apt-get install'
-alias search='sudo -E apt-cache search'
-alias show='sudo -E apt-cache show'
-alias remove='sudo -E apt-get purge'
-alias orphand='sudo deborphan | xargs sudo apt-get -y remove --purge'
-alias cleanup='sudo -E apt-get autoclean && sudo -E apt-get autoremove && sudo -E apt-get clean && sudo -E apt-get remove && orphand'
-alias updatedb='sudo updatedb'
 alias df='df -h -x tmpfs -x usbfs'
 alias du='du -h --max-depth=1'
 # empty trash
@@ -247,21 +126,15 @@ alias ports="lsof -i -n -P"
 alias ping='ping -c 10'
 alias openports='netstat -nape --inet'
 alias ssh-keygen='ssh-keygen -Rv'
-alias gpull='git pull origin master -u'
 alias more=less
 alias nuke='kill -9'
 alias latest='ls -Art | tail -n 1'
 alias rlatest='find . -not -type d -printf "%T+ %p\n" | sort -n | tail -1'
-
-# Anti-virus checks
-
-alias rkhunter='sudo rkhuter --check'
-alias clamscan='sudo clamscan -irv --exclude=/proc --exclude=/sys --exclude=/dev --exclude=/media --exclude=/mnt'
-alias lynis='sudo lynis -c'
-alias tiger='sudo tiger'
+alias vi=vim
 
 
-export HISTIGNORE="ls:cd:[bf]g:exit"
+#export HISTIGNORE="ls:cd:[bf]g:exit"
+
 p() {
    ps auxwww | grep "$*"
 }
@@ -282,23 +155,6 @@ ff() {
 md() {
     mkdir -p -v $1
     cd $1
-}
-
-xlint() {
-  xmllint --output $1 --format $1
-}
-
-netinfo ()
-{
-echo "--------------- Network Information ---------------"
-/sbin/ifconfig | awk /'inet addr/ {print $2}'
-echo ""
-/sbin/ifconfig | awk /'Bcast/ {print $3}'
-echo ""
-/sbin/ifconfig | awk /'inet addr/ {print $4}'
-echo ""
-/sbin/ifconfig | awk /'HWaddr/ {print $4,$5}'
-echo "---------------------------------------------------"
 }
 
 mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
@@ -328,11 +184,8 @@ functions()
   echo -e "${txtcyn}mktgz() <directory> :${txtrst} create a tar.gz archive file"
   echo -e "${txtcyn}mktbz() <directory> :${txtrst} create a tar.bz2 archive file"
   echo -e "${txtcyn}netinfo 	: ${txtrst}gets my internal ip address"
-  echo -e "${txtcyn}or <filename> 	: ${txtrst}creates a backup file"
   echo -e "${txtcyn}up <number> 	: ${txtrst}goes <number> level up like cd .."
-  echo -e "${txtcyn}xlint 		: ${txtrst}formats an xml document"
   echo -e "${txtcyn}p           	: ${txtrst}search for a process"
-  echo -e "${txtcyn}pullall 	: ${txtrst}pulls all the git respositories in ~/workspace directory"
   echo -e ""
   echo -e "${txtcyn}tips 		: ${txtrst}general tips"
   echo -e "${txtcyn}bashtips 	: ${txtrst}tips on bash terminal"
@@ -580,67 +433,6 @@ ${txtpur}----------------------------------------------------------------------
 "
 }
 
-mongotips()
-{
-  echo -e "${txtcyn}mongo <host-name>"
-  echo -e "${txtcyn}show dbs"
-  echo -e "${txtcyn}use <db-name>"
-  echo -e "${txtcyn}show collections"
-  echo -e "${txtcyn}db.messages.find({'subject.type':'event'}).count()"
-  echo -e "${txtcyn}db.messages.find({'subject.type':'event'}).pretty()"
-  echo -e "${txtcyn}db.messages.remove({'subject.type':'event'})"
-  echo -e "${txtcyn}db.messages.find({'subject.type.count': {$gt: 2}})"
-  echo -e "${txtcyn}db.messages.find({'subject.type.count': {$exixts: true, $in: [1, 10]}}).count()"
-
- }
-
-debugtips()
-{
-  echo -e "${txtcyn}Look in /var/log/jetty or jboss and /usr/log/* using tail -F"
-  echo -e "${txtcyn}pstree, top , iostat -x 5 , kill -3 <java process-id> "
-  echo -e "${txtcyn}http://<serviceName>/Library/1.x/info/threads"
-  echo -e "${txtcyn}http://<serviceName>/Library/1.x/info/metrics"
-}
-
-function rangertips {
-echo -e "${txtpur}
-----------------------------------------------------------------------${txtrst}
-${txtcyn}[s]     ${txtrst}opens a shell for commands like rm etc.
-${txtcyn}[r]     ${txtrst}displays open-with for specifying vi,emacs etc.
-${txtcyn}[E]     ${txtrst}opens the file in default editor for editing.
-${txtcyn}[i]     ${txtrst}showing info/contents of the file.
-${txtcyn}[I]     ${txtrst}rename the current file.
-
-${txtcyn}[h]     ${txtrst}go backward in history.
-${txtcyn}[l]     ${txtrst}go forward in history.
-
-${txtcyn}[Space]     ${txtrst}selects a file/directory.
-${txtcyn}[Escape]    ${txtrst}cancels the last command.
-${txtcyn}[f<dname>]  ${txtrst}jump to directory.
-
-${txtcyn}[V]      ${txtrst}enables viual selection mode.
-${txtcyn}[u?]     ${txtrst}universal undo key.
-${txtcyn}[uv]     ${txtrst}clear all the selection.
-
-${txtcyn}[dd]     ${txtrst}to paste
-${txtcyn}[yy]     ${txtrst}to copy
-${txtcyn}[pp]     ${txtrst}to paste
-
-${txtcyn}[gn]     ${txtrst}new tab
-${txtcyn}[gh]     ${txtrst}to home directory
-${txtcyn}[gc]     ${txtrst}close tab
-${txtcyn}[gg]     ${txtrst}go to the begining
-${txtcyn}[G]      ${txtrst}go to end.
-${txtcyn}[q]      ${txtrst}to quit
-
-${txtcyn}[?]          ${txtrst}displaying man page
-${txtcyn}[; or :]     ${txtrst}open command tool bar (cut, copy, delete, paste,rename etc).
-${txtcyn}[2?]         ${txtrst}list all commands that could be used on the shell
-${txtcyn}[/s]         ${txtrst}searching file s in current directory.
-
-${txtpur}----------------------------------------------------------------------
-"
-}
 
 function magittips {
 echo -e "${txtpur}
@@ -719,60 +511,3 @@ ${txtpur}----------------------------------------------------------------------
 }
 
 
-
-
-##======================================
-#####NOKIA FUNCTIONS####################
-##======================================
-function prod() {
-   /usr/bin/ssh $1.pr.int.ent.nokia.com
-}
-
-function dev() {
-   /usr/bin/ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $1.brislabs.com
-}
-
-pullall() {
-CURRENTDIR="`pwd`"
-for dir in $(find ~/workspace/ -maxdepth 1 -type d);
-do
-  echo "$dir";
-  command cd "$dir";
-  git pull;
-  if [ $? != 0 ]; then
-  	echo -e "${RED}Git Pull Failed for  $dir ${txtrst}";
-  fi
-done
-command cd "$CURRENTDIR"
-}
-
-function appgateroute() {
-  sudo ip route add 10.216.220.156 via 172.26.52.1
-  sudo ip route add 10.216.138.0/24 via 172.26.52.1
-  sudo ip route add 10.216.141.0/24 via 172.26.52.1
-  sudo ip route add 10.216.143.0/24 via 172.26.52.1
-}
-
-#my env setup
-#export GOPATH=$HOME/go
-#export GOROOT=$HOME/Code/go
-#export PATH=$PATH:$GOPATH/bin
-#export PATH=$PATH:$GOROOT/bin
-#export IDEA_HOME="/usr/local/idea"
-#export PATH=$PATH:$IDEA_HOME/bin
-#export JAVA_HOME="/usr/lib/jvm/java-7-oracle"
-#export M2_HOME="/usr/local/apache-maven-3.0.4"
-#export PATH=$PATH:$M2_HOME/bin
-#export MAVEN_OPTS="-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m"
-#proxy
-#other proxy 172.16.99.10
-#export no_proxy="127.0.0.1,127.0.1.1,localhost,nokia.com,ssdinst,web-proxy,proxyconf,brislabs.com"
-#export http_proxy="http://172.16.42.40:8080/"
-#export https_proxy="https://172.16.42.40:8080/"
-export PATH=$PATH:$HOME/bin:~/mycode/git-radar
-
-#source "/usr/lib/bash-git-prompt/gitprompt.sh"
-#GIT_PROMPT_ONLY_IN_REPO=1
-
-
-#export ftp_proxy="ftp://172.16.42.40:8080/"
