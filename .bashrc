@@ -76,6 +76,7 @@ extract () {
 	fi
 }
 
+export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
 export GREP_COLORS='ms=01;36'
 export LESS_TERMCAP_mb=$'\E[01;31m'
