@@ -17,7 +17,6 @@ YELLOW='\e[1;33m'
 WHITE='\e[1;37m'
 NC='\e[0m' # No Color
 
-
 #------------------------------------------
 #------WELCOME MESSAGE---------------------
 # customize this first message with a message of your choice.
