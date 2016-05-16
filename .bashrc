@@ -18,22 +18,6 @@ WHITE='\e[1;37m'
 NC='\e[0m' # No Color
 
 
-#------------------------------------------
-#------WELCOME MESSAGE---------------------
-# customize this first message with a message of your choice.
-# this will display the username, date, time, a calendar, the amount of users, and the up time.
-clear
-# Gotta love ASCII art with figlet
-#figlet "Welcome, " $USER;
-#echo -e ""
-#echo -ne "Today is "; date
-#echo -e  "${BROWN}"; df ;
-#echo -e  "${LIGHTBLUE}"; uname -a ;
-#echo -e  "${BROWN}"; free ;
-#echo -e ""
-echo -ne "${BROWN}Up time:";uptime | awk /'up/'
-echo "";
-
 # use more colors
 export TERM=xterm-256color
 
