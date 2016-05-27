@@ -97,23 +97,16 @@ alias f="find . -iname -type f"
 alias em='emacsclient -c'
 alias emt='emacsclient -t'
 alias eml='emacs -q --load /home/nico/code/emacs-live/init.el'
-alias df='df -h -x tmpfs -x usbfs'
+#alias df='df -h -x tmpfs -x usbfs'
 alias du='du -h --max-depth=1'
-# empty trash
-alias trash="rm -fr ~/.local/share/Trash"
 alias ls='ls --color=auto'
 alias less='less -W'
-alias xmllint='xmllint --format'
 alias ll='ls -l --group-directories-first'
 alias mkdir='mkdir -p'
-alias cp="cp -v"
 alias grep='grep -iI --color=tty'
 alias free='free -m'
 alias ports="lsof -i -n -P"
-#alias ps='ps auxfwww'
 alias ping='ping -c 10'
-alias openports='netstat -nape --inet'
-alias ssh-keygen='ssh-keygen -Rv'
 alias more=less
 alias nuke='kill -9'
 alias latest='ls -Art | tail -n 1'
@@ -146,13 +139,8 @@ md() {
 }
 
 mktar() { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
-mktgz() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+mktgz() { tar cvzf "${1%%/}.tgz"  "${1%%/}/"; }
 mktbz() { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
-
-myip()
-{
-wget -q -O - checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//';
-}
 
 txtrst='\e[0m'    # Text Reset
 txtcyn='\e[0;36m' # Cyan
